@@ -1,0 +1,334 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens — نفس باleta الموقع الأساسي (رياضي / شبابي)
+   ========================================================================== */
+@theme {
+  --color-plum: #0d1219;
+  --color-ink: #06080c;
+  --color-pink: #0047ff;
+  --color-sun: #ff5c1a;
+  --color-paper: #f1f4f8;
+  --color-white: #ffffff;
+  --color-line: #263142;
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Changa", system-ui, sans-serif;
+  --radius-frame: 1.75rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* مؤشر الموس على شكل دمبل حديد. */
+  html,
+  body,
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  a {
+    cursor:
+      url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDM2IDM2Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9Imlyb24iIHgxPSIwIiB5MT0iMCIgeDI9IjAuNTUiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjAuMzUiIHN0b3AtY29sb3I9IiNkNWQ4ZGQiLz48c3RvcCBvZmZzZXQ9IjAuNjIiIHN0b3AtY29sb3I9IiM4ZDk0OWUiLz48c3RvcCBvZmZzZXQ9IjAuODUiIHN0b3AtY29sb3I9IiM0YzUyNWIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyNzJjMzMiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYmFyIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZThlYmVmIi8+PHN0b3Agb2Zmc2V0PSIwLjUiIHN0b3AtY29sb3I9IiM5YWExYWIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzYzQyNGEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIyIiB5PSIxMSIgd2lkdGg9IjciIGhlaWdodD0iMTQiIHJ4PSIyLjQiIGZpbGw9InVybCgjaXJvbikiIHN0cm9rZT0iIzBkMTIxOSIgc3Ryb2tlLXdpZHRoPSIxLjMiLz48cmVjdCB4PSIyNyIgeT0iMTEiIHdpZHRoPSI3IiBoZWlnaHQ9IjE0IiByeD0iMi40IiBmaWxsPSJ1cmwoI2lyb24pIiBzdHJva2U9IiMwZDEyMTkiIHN0cm9rZS13aWR0aD0iMS4zIi8+PHJlY3QgeD0iOS42IiB5PSIxNS4yIiB3aWR0aD0iMTYuOCIgaGVpZ2h0PSI1LjYiIHJ4PSIxLjYiIGZpbGw9InVybCgjYmFyKSIgc3Ryb2tlPSIjMGQxMjE5IiBzdHJva2Utd2lkdGg9IjEuMyIvPjxwYXRoIGQ9Ik01LjUgMTMuNXY5IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjU1IiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTMwLjUgMTMuNXY5IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjU1IiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+")
+        10 12,
+      auto;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* مساحة فوق عشان الهيدر الثابت ما يغطّي بداية الأقسام. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-plum);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sun);
+    outline-offset: 3px;
+  }
+
+  /* عناوين بحروف كبيرة وبوزن ثقيل — شكل الزي الرياضي. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  /* في العربي مفيش حروف كبيرة، وبنستخدم خط عربي أوضح. */
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3 {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-sans);
+    font-weight: 800;
+  }
+}
+
+/* ==========================================================================
+   Shapes & helpers
+   ========================================================================== */
+
+/* قواعد مائلة (أسفل الهيدر وأعلى قسم الفيديوهات). */
+.slant-down {
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+
+.slant-up {
+  clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* إطار الصور: حد برتقالي + خطوط سرعة مائلة بالخلفية. */
+.frame {
+  border: 3px solid var(--color-sun);
+  border-radius: var(--radius-frame);
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      color-mix(in srgb, var(--color-pink) 18%, transparent) 10px,
+      color-mix(in srgb, var(--color-pink) 18%, transparent) 12px
+    );
+}
+
+/* خطوط سرعة مائلة للهيدر وشريط الأخبار. */
+.sport-stripes {
+  background-image: repeating-linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--color-white) 9%, transparent) 0 14px,
+    transparent 14px 30px
+  );
+}
+
+/* زرار أساسي: حروف كبيرة + ظل صلب برتقالي بيتضخم مع الضغط. */
+.cta {
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  box-shadow: 5px 5px 0 0 var(--color-sun);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--color-sun);
+}
+
+.cta:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 0 var(--color-sun);
+}
+
+/* بطاقة الباقة بترتفع مع الظل الأزرق. */
+.pkg {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pkg:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 0 3px var(--color-pink);
+}
+
+/* ايقونات السوشيال: بترتفع وبتدور مع هفر أزرق زي كروت الباقات. */
+.social-link {
+  transition:
+    background 0.28s ease,
+    color 0.28s ease,
+    transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.social-link svg {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.social-link:hover {
+  background: var(--color-pink);
+  color: var(--color-white);
+  border-color: var(--color-pink);
+  transform: translateY(-10px) scale(1.12);
+  box-shadow:
+    0 0 0 3px var(--color-sun),
+    0 16px 26px -14px rgb(0 0 0 / 0.8);
+}
+
+.social-link:hover svg {
+  transform: rotate(-12deg) scale(1.15);
+}
+
+.social-link:active {
+  transform: translateY(-4px) scale(1.04);
+}
+
+/* ==========================================================================
+   Header (شريط ثابت فوق)
+   ========================================================================== */
+
+.navbar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease,
+    padding 0.3s ease;
+}
+
+/* قبل النزول: شفاف فوق الهيرو الغامق. */
+.navbar-top {
+  background: transparent;
+}
+
+/* بعد النزول: زجاجي غامق + ظل. */
+.navbar-scrolled {
+  background: color-mix(in srgb, var(--color-ink) 88%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.9);
+}
+
+/* لينك الهيدر: خط برتقالي بيطلع من تحت أول ما الموس يلمسه. */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--color-sun);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-sun);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* زرار اللغة والواتساب في الهيدر. */
+.nav-pill {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-pill:hover {
+  border-color: var(--color-sun);
+  color: var(--color-sun);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Interactions (تفاعل مع الموس في كل حاجة)
+   ========================================================================== */
+
+/* أي عنصر بيتحرك شبر شبر لما الموس يلمسه. */
+.hover-lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px -22px rgb(0 0 0 / 0.85);
+}
+
+/* صور الجاليري: زووم ناعم مع هفر. */
+.zoom-frame {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.zoom-frame:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 3px var(--color-sun);
+}
+
+/* عناوين الأقسام بتتحرك لليمين شبر مع الهفر. */
+.section-title {
+  transition: transform 0.25s ease;
+}
+
+.section-title:hover {
+  transform: translateX(6px);
+}
+
+[dir="rtl"] .section-title:hover {
+  transform: translateX(-6px);
+}
+
+/* حروف الماركيز بتكبر مع الهفر. */
+.marquee-word {
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+  display: inline-block;
+}
+
+.marquee-word:hover {
+  color: var(--color-sun);
+  transform: scale(1.12);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 22s linear infinite;
+}
+
+/* في العربي الماركيز يتحرك في الاتجاه المعاكس. */
+[dir="rtl"] .marquee-track {
+  animation-direction: reverse;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
